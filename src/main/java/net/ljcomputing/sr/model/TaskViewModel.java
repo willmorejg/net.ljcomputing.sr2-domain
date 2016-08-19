@@ -38,7 +38,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author James G. Willmore
  *
  */
-public class TaskViewModel extends AbstractModel 
+public class TaskViewModel extends AbstractModel
     implements Comparable<TaskViewModel>, Model, Entity {
 
   /** The start time. */
@@ -69,15 +69,16 @@ public class TaskViewModel extends AbstractModel
   private String wbsDescription;
 
   /** The elapsed time. */
-  private long elapsedTime;
+  private transient long elapsedTime;
 
   /** The elapsed time in hours. */
-  private double elapsedHours;
+  private transient double elapsedHours;
 
   /**
    * @see net.ljcomputing.persistence.Entity#populate(net.ljcomputing.persistence.EntityPopulator, java.sql.ResultSet)
    */
-  public void populate(final EntityPopulator entityPopulator, final ResultSet resultSet) throws PersistenceException {
+  public void populate(final EntityPopulator entityPopulator,
+      final ResultSet resultSet) throws PersistenceException {
     entityPopulator.populate(this, resultSet);
     calculateElapsedTime();
   }
@@ -96,7 +97,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param startTime the new start time
    */
-  public void setStartTime(Date startTime) {
+  public void setStartTime(final Date startTime) {
     this.startTime = startTime;
     calculateElapsedTime();
   }
@@ -115,7 +116,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param endTime the new end time
    */
-  public void setEndTime(Date endTime) {
+  public void setEndTime(final Date endTime) {
     this.endTime = endTime;
     calculateElapsedTime();
   }
@@ -134,7 +135,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param comments the new comments
    */
-  public void setComments(String comments) {
+  public void setComments(final String comments) {
     this.comments = comments;
   }
 
@@ -152,7 +153,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param activityId the new activity id
    */
-  public void setActivityId(Integer activityId) {
+  public void setActivityId(final Integer activityId) {
     this.activityId = activityId;
   }
 
@@ -170,7 +171,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param activityName the new activity name
    */
-  public void setActivityName(String activityName) {
+  public void setActivityName(final String activityName) {
     this.activityName = activityName;
   }
 
@@ -188,7 +189,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param activityDescription the new activity description
    */
-  public void setActivityDescription(String activityDescription) {
+  public void setActivityDescription(final String activityDescription) {
     this.activityDescription = activityDescription;
   }
 
@@ -206,7 +207,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param wbsId the new wbs id
    */
-  public void setWbsId(Integer wbsId) {
+  public void setWbsId(final Integer wbsId) {
     this.wbsId = wbsId;
   }
 
@@ -224,7 +225,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param wbsName the new wbs name
    */
-  public void setWbsName(String wbsName) {
+  public void setWbsName(final String wbsName) {
     this.wbsName = wbsName;
   }
 
@@ -242,7 +243,7 @@ public class TaskViewModel extends AbstractModel
    *
    * @param wbsDescription the new wbs description
    */
-  public void setWbsDescription(String wbsDescription) {
+  public void setWbsDescription(final String wbsDescription) {
     this.wbsDescription = wbsDescription;
   }
 
@@ -261,7 +262,7 @@ public class TaskViewModel extends AbstractModel
    * @return the task
    */
   public Task getTask() {
-    Task task = new Task(getActivityId());
+    final Task task = new Task(getActivityId());
 
     task.setId(getId());
     task.setStartTime(getStartTime());
@@ -280,8 +281,8 @@ public class TaskViewModel extends AbstractModel
     elapsedTime = 0;
 
     if (getEndTime() != null && getStartTime() != null) {
-      Instant end = getEndTime().toInstant();
-      Instant start = getStartTime().toInstant();
+      final Instant end = getEndTime().toInstant();
+      final Instant start = getStartTime().toInstant();
       elapsedTime = ChronoUnit.MINUTES.between(start, end);
       elapsedHours = (double) (elapsedTime / 60d);
     }
@@ -325,7 +326,8 @@ public class TaskViewModel extends AbstractModel
    */
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    return ToStringBuilder.reflectionToString(this,
+        ToStringStyle.MULTI_LINE_STYLE);
   }
 
   /**
@@ -334,7 +336,7 @@ public class TaskViewModel extends AbstractModel
    * @return the list
    */
   public List<String> toValuesList() {
-    List<String> values = new ArrayList<String>();
+    final List<String> values = new ArrayList<String>();
 
     values.add(wbsName);
     values.add(activityName);
@@ -347,17 +349,16 @@ public class TaskViewModel extends AbstractModel
   /**
    * @see java.lang.Comparable#compareTo(java.lang.Object)
    */
-  public int compareTo(TaskViewModel obj) {
-    int finalOrder = 0;
-
-    finalOrder = compareStrings(wbsName, obj.getWbsName());
+  public int compareTo(final TaskViewModel obj) {
+    int finalOrder = compareStrings(wbsName, obj.getWbsName());
 
     if (finalOrder == 0) {
       finalOrder = compareStrings(activityName, obj.getActivityName());
     }
 
     if (finalOrder == 0) {
-      finalOrder = Double.valueOf(elapsedHours).compareTo(Double.valueOf(obj.getElapsedHours()));
+      finalOrder = Double.valueOf(elapsedHours)
+          .compareTo(Double.valueOf(obj.getElapsedHours()));
     }
 
     return finalOrder;
@@ -371,7 +372,7 @@ public class TaskViewModel extends AbstractModel
    * @param right the right
    * @return the int
    */
-  private int compareStrings(String left, String right) {
+  private int compareStrings(final String left, final String right) {
     int finalOrder = 0;
 
     if (left == null && right != null) {

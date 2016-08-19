@@ -20,11 +20,11 @@ package net.ljcomputing.sr.model;
 import java.text.DecimalFormat;
 
 /**
- * Interface defining Status Reporter constant, and persistent, values.
+ * Class defining Status Reporter constant, and persistent, values.
  * 
  * @author James G. Willmore
  */
-public class SrConstants {
+public final class SrConstants {
   
   /** The decimal format. */
   public final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###.0##");

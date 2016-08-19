@@ -51,7 +51,5 @@ digraph G {
 <tr><td align="center" balign="center"> SrConstants </td></tr>
 		</table></td></tr>
 		</table>>, URL="./SrConstants.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	//net.ljcomputing.sr.model.TaskViewReport extends net.ljcomputing.sr.model.SrConstants
-	c6:p -> c4:p [dir=back,arrowtail=empty];
 }
 

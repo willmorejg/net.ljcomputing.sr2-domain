@@ -15,13 +15,5 @@ digraph G {
 <tr><td align="center" balign="center"> TaskViewReport </td></tr>
 		</table></td></tr>
 		</table>>, URL="./TaskViewReport.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	// net.ljcomputing.sr.model.SrConstants
-	c82 [label=<<table title="net.ljcomputing.sr.model.SrConstants" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./SrConstants.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> SrConstants </td></tr>
-		</table></td></tr>
-		</table>>, URL="./SrConstants.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	//net.ljcomputing.sr.model.TaskViewReport extends net.ljcomputing.sr.model.SrConstants
-	c82:p -> c80:p [dir=back,arrowtail=empty];
 }
 

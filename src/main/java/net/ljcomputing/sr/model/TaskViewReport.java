@@ -28,7 +28,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @author James G. Willmore
  *
  */
-public class TaskViewReport extends SrConstants {
+public class TaskViewReport {
 
   /** The header. */
   public static final String[] CVS_RECORD_HEADER = { "WBS Name", "Activity Name", "Duration" };
@@ -73,7 +73,7 @@ public class TaskViewReport extends SrConstants {
 
     values.add(wbsName);
     values.add(activityName);
-    values.add(DECIMAL_FORMAT.format(elapsedHours));
+    values.add(SrConstants.DECIMAL_FORMAT.format(elapsedHours));
 
     return values;
   }
